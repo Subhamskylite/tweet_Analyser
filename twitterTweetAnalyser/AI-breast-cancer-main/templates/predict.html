@@ -1,0 +1,59 @@
+ {%extends 'base.html'%} {%block content%} 
+<div class="body-div">
+    {% if value %}
+<div class="predict-final">
+    <div class="predict-main">
+        <b class="cwhite1">Total Neutral Tweets are: <span class="cblue">{{neutralTweets}}</span>.</b>
+    </div>
+    <div class="predict-main">
+        <b class="cwhite1">Total Positive Tweets are: <span class="cblue">{{positiveTweets}}</span>.</b>
+    </div>
+    <div class="predict-main">
+        <b class="cwhite1">Total Negative Tweets are: <span class="cblue">{{negativeTweets}}</span>.</b>
+    </div>
+    <div class="predict-you">
+       {{log}}
+    </div>
+
+    <div class="predict-last">
+        We as well advice you to concult a doctor
+    </div>
+
+</div>
+
+{% else %}
+<div class="form-body">
+    <div class="for-cen">
+        <form class="" method="POST" action="/">
+            {% csrf_token %}
+<div id="loading" class="">Loading</div>
+<!-- intially width:0 px position:fixed; top 0 bottom 0 left 0  transition-->
+<!-- load class style width 100% right 0px  -->
+            <div class="namedata">
+                <div class="ndata">
+                    <label for="Search">SEARCH:</label>
+                    <input type="text" name="Search" placeholder='enter your hashtag'>
+                </div>
+             </div>  
+            <div class="buttonForSearch" >
+                <button type="submit" onclick="funLoad()">
+
+              Try to Predict
+          </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endif %}
+
+<script>
+    function funLoad(){
+            var elem =document.getElementById("loading");
+            elem.classList.add("load");
+    } 
+</script>
+</div>
+
+{%endblock%}
