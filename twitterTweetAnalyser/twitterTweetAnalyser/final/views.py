@@ -152,5 +152,4 @@ def  predict(request):
         # negative_tweets = ' '.join(tweet[tweet['sentiment'] == 'negative']['tweet'])
 
     return render(request,'predict.html', {'value':val,'neutralTweets':total_neutral_tweets,'positiveTweets':total_positive_tweets,'negativeTweets':total_negative_tweets,'log':tweet, 'title':'Try to Predict !','acti':'nav-acti'})
-    print("Home")
-    return render(request, 'home.html', {'title':'Home','acti':'nav-acti'})
+    

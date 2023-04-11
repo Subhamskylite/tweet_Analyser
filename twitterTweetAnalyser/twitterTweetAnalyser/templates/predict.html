@@ -22,28 +22,21 @@
 </div>
 
 {% else %}
-<div class="form-body">
-    <div class="for-cen">
-        <form class="" method="POST" action="/">
+<div class="formContainer">
+        <form class="formBody" method="POST" action="/">
             {% csrf_token %}
-<div id="loading" class="">Loading</div>
+<!-- <div id="loading" class=""></div> -->
 <!-- intially width:0 px position:fixed; top 0 bottom 0 left 0  transition-->
 <!-- load class style width 100% right 0px  -->
-            <div class="namedata">
-                <div class="ndata">
-                    <label for="Search">SEARCH:</label>
-                    <input type="text" name="Search" placeholder='enter your hashtag'>
-                </div>
+            <div class="searchContainer">
+                    <label class="searchLabel" for="Search">SEARCH:</label>
+                    <input class="searchBox" type="text" name="Search" placeholder='enter keyword!'>
              </div>  
             <div class="buttonForSearch" >
-                <button type="submit" onclick="funLoad()">
-
-              Try to Predict
-          </button>
+                <button class="searchButton" type="submit" onclick="funLoad()">ANALYSE!!</button>
             </div>
 
         </form>
-    </div>
 </div>
 
 {% endif %}

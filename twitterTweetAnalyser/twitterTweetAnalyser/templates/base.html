@@ -6,44 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}} | Breast Cancer Prediction</title>
-    <script src="https://kit.fontawesome.com/5bd445c778.js" crossorigin="anonymous"></script>
-    <meta name="author" content="Ravula Pranay Kumar Reddy">
-    <meta name="author" content="Bokka Nirvan Reddy">
+    <!-- <script src="https://kit.fontawesome.com/5bd445c778.js" crossorigin="anonymous"></script> -->
+    <meta name="author" content="">
+    <meta name="author" content="">
     <link rel="stylesheet" href="{% static 'common.css' %}">
 </head>
 
 
 <body>
-   
-  <div id="navbar">
+    <div class="heading">Tweets Sentiment Analyser</div>
+  <div class="logoContainer">
+    <a href="https://twitter.com"><img class="logo" src="{% static 'twitterLogo.png' %}" alt="twitter"></a>
   </div>
+  <!-- <div id="navbar"></div> -->
+  
   
 
   {% block content %} {% endblock %}
 
   <!-- <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-arrow-circle-up"></i></button> -->
-  <script>
-              var prevScrollpos = window.pageYOffset;
-              window.onscroll = function() {
-                  scrollFunction();
-              }
-      var mybutton = document.getElementById("myBtn");
-
-
-      function scrollFunction() {
-          if (document.body.scrollTop > 65 || document.documentElement.scrollTop > 65) {
-              mybutton.style.display = "block";
-          } else {
-              mybutton.style.display = "none";
-          }
-      }
-
-      function topFunction() {
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-      }
-
-  </script>
+  <script></script>
 </body>
 
 
