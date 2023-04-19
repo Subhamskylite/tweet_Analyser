@@ -1,33 +1,63 @@
  {%extends 'base.html'%} {%block content%} 
-<div class="body-div">
+ {% load static %}
+<div class="predictContainer">
     {% if value %}
-<div class="predict-final">
-    <div class="predict-main">
-        <b class="cwhite1">Total Neutral Tweets are: <span class="cblue">{{neutralTweets}}</span>.</b>
+<script type="text/javascript">
+    var elem=document.getElementById('loading');
+    elem.style.display='none';
+</script>
+<div class="resultPage">
+    <div class="resultPageHeading">Reactions To :- '<u><b>{{searchWord}}'</b></u></div>
+    <div class="resultsBox">
+    <div id="neutralBox" class="resultBox" style="background-image: url({% static 'line.png' %})">
+        Neutral Tweets :{{neutralTweets}}%
     </div>
-    <div class="predict-main">
-        <b class="cwhite1">Total Positive Tweets are: <span class="cblue">{{positiveTweets}}</span>.</b>
+    <div id="positiveBox" class="resultBox" style="background-image: url({% static 'accept.png' %})">
+        Positive Tweets :{{positiveTweets}}%
     </div>
-    <div class="predict-main">
-        <b class="cwhite1">Total Negative Tweets are: <span class="cblue">{{negativeTweets}}</span>.</b>
+    <div id="negativeBox" class="resultBox" style="background-image: url({% static 'cancel.png' %})">
+        Negative Tweets :{{negativeTweets}}%
     </div>
-    <div class="predict-you">
+    </div>
+    <!-- <div class="">
        {{log}}
+    </div> -->
+    <div>
+        <script
+        type="text/javascript"
+        src="https://www.gstatic.com/charts/loader.js"
+      ></script>
+      <script type="text/javascript">
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ['Sentiment', 'Percentage'],
+            ['Positive' , {{positiveTweets}}],
+            ['Negative',  {{negativeTweets}}],
+            ['Neutral',  {{neutralTweets}}],
+          ]);
+  
+          var options = {
+            title: 'Sentimental Analysis on Recent Tweets on Topic',
+            is3D: true,
+          };
+  
+          var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+          chart.draw(data, options);
+        }
+      </script>
     </div>
-
-    <div class="predict-last">
-        We as well advice you to concult a doctor
+    <div id="piechart_3d" >
     </div>
 
 </div>
 
 {% else %}
-<div class="formContainer">
+
+<div id="formContainerID" class="formContainer">
         <form class="formBody" method="POST" action="/">
             {% csrf_token %}
-<!-- <div id="loading" class=""></div> -->
-<!-- intially width:0 px position:fixed; top 0 bottom 0 left 0  transition-->
-<!-- load class style width 100% right 0px  -->
             <div class="searchContainer">
                     <label class="searchLabel" for="Search">SEARCH:</label>
                     <input class="searchBox" type="text" name="Search" placeholder='enter keyword!'>
@@ -44,7 +74,15 @@
 <script>
     function funLoad(){
             var elem =document.getElementById("loading");
-            elem.classList.add("load");
+            elem.style.display='block';
+            var elem =document.getElementById('loadingIcon');
+            elem.style.display='block';
+            elem=document.getElementById('formContainerID');
+            elem.style.opacity=0.4;
+            elem=document.getElementById('headingID');
+            elem.style.opacity=0.4;
+            elem=document.getElementById('logoContainerID');
+            elem.style.opacity=0.4;
     } 
 </script>
 </div>

@@ -104,11 +104,14 @@ def  predict(request):
     total_neutral_tweets=0
     total_positive_tweets=0
     total_negative_tweets=0
+    keyword=''
+    totalTweets=0
+    img_base64=""
     if request.method == 'POST':
         outputRes='done'
         c = twint.Config()
         c.Search = request.POST['Search']
-       
+        keyword=request.POST['Search'].upper()
         c.language = "en"
         c.Store_object = True
         c.Pandas = True
@@ -140,16 +143,40 @@ def  predict(request):
         total_negative_tweets = tweet[tweet['sentiment'] == 'negative'].shape[0]
         total_neutral_tweets = tweet[tweet['sentiment'] == 'neutral'].shape[0]
         val=1
-
+        totalTweets=total_positive_tweets+total_negative_tweets+total_neutral_tweets
+        
+        total_neutral_tweets=round((total_neutral_tweets/totalTweets)*100,2)
+        total_positive_tweets=round((total_positive_tweets/totalTweets)*100,2)
+        total_negative_tweets=round((total_negative_tweets/totalTweets)*100,2)
 
         print("Total Positive Tweets:", total_positive_tweets)
         print("Total Negative Tweets:", total_negative_tweets)
         print("Total Neutral Tweets:", total_neutral_tweets)
         # Create a string of all the tweets with positive sentiment
         # positive_tweets = ' '.join(tweet[tweet['sentiment'] == 'positive']['tweet'])
+        
+        from wordcloud import WordCloud
+        import matplotlib.pyplot as plt
 
-        # # Create a string of all the tweets with negative sentiment
-        # negative_tweets = ' '.join(tweet[tweet['sentiment'] == 'negative']['tweet'])
+        tweet = ' '.join('clean_tweet')
+        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(tweet)
+    
+    # Generate the wordcloud as an image
+        plt.figure(figsize=(10, 5))
+        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.axis('off')
+    
+    # Convert the image to base64 string
+        import io
+        buf = io.BytesIO()
+        plt.savefig(buf, format='png')
+        buf.seek(0)
+        img_base64 = buf.getvalue()
+        buf.close()
+    
+    # Pass the image data to the template
 
-    return render(request,'predict.html', {'value':val,'neutralTweets':total_neutral_tweets,'positiveTweets':total_positive_tweets,'negativeTweets':total_negative_tweets,'log':tweet, 'title':'Try to Predict !','acti':'nav-acti'})
+
+
+    return render(request,'predict.html', {'image': img_base64,'value':val,'searchWord':keyword,'total':totalTweets,'neutralTweets':total_neutral_tweets,'positiveTweets':total_positive_tweets,'negativeTweets':total_negative_tweets,'log':tweet, 'title':'Try to Predict !','acti':'nav-acti'})
     

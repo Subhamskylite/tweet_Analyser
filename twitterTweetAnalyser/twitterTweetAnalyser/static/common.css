@@ -3,22 +3,58 @@
     box-sizing: border-box;
     margin: 0px;
 }
+
 body{
     background-color: aqua;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+#loading{
+    display: none;
+    font-size: xxx-large;
+    position: absolute;
+    top: 40vh;
+    font-size: xxx-large;
+    font-family: 'Merriweather';
+    z-index: 100;
+}
+#loadingIcon{
+    display: none;
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 20vh;
+    height: 20vh;
+    animation: spin 2s linear infinite;
+    position: relative;
+    margin: auto;
+    /* top: 50vh; */
+    font-size: xxx-large;
+    font-family: 'Merriweather';
+    z-index: 100;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+.predictContainer{
+    /* border: black solid 1px; */
+    width: 80vw;
+}
 .heading{
+    /* font-size: xx-large; */
     font-size: xxx-large;
     font-family: 'Merriweather';
     color: #1D9BF0;
 }
+
 .logoContainer{
     height: 50vh;
     width: 50vh;
     /* border: black 1px solid; */
     border-radius: 50%;
+    padding: 0px;
 }
 .logo{
     /* height: 50vh; */
@@ -31,8 +67,9 @@ body{
     transition-duration: 0.5s;
     transition-timing-function: ease-in-out;
 }
- .formContainer{
+.formContainer{
    /* border: black solid 1px; */
+   margin-top: 5vh;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -77,7 +114,7 @@ body{
     font-family:'Times New Roman', Times, serif;
     background-color: #1D9BF0;
     box-shadow: 0.25vh 0.25vh #1d6da1;
-    color: aquamarine;
+    color:aquamarine;
     height: 7.5vh;
     width: 25vh;
     border-radius: 1vh;
@@ -88,4 +125,83 @@ body{
     transform: scale(1.25);
     transition-duration: 0.5s;
     background-color: #1d6da1;
+}
+
+/* result page part */
+
+.resultsPage{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+}
+.resultsBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5vh;
+}
+.resultPageHeading{
+    font-family: 'Merriweather';
+    font-size: xx-large;
+    text-align: center;
+}
+@keyframes slideInFromLeft {
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+@keyframes slideInFromBottom {
+    0%{
+        transform: translateY(-100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+@keyframes slideInFromRight {
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+.resultBox{
+    text-align: center;
+    padding-top: 10vw;
+    margin: auto;
+    border: black 1vh solid;
+    height: 20vw;
+    width: 20vw; 
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: larger;
+    font-family: 'Merriweather';
+    
+}
+
+#neutralBox{
+    animation: slideInFromLeft 1s ease-in-out;
+}
+#positiveBox{
+    animation: slideInFromBottom 1s ease-in-out;
+}
+#negativeBox{
+    animation: slideInFromRight 1s ease-in-out;
+}
+.graphBox{
+    padding: 5vh;
+    border: black 1px solid;
+}
+#piechart_3d{
+    margin: auto;
+    width: 60vw;
+    height: 75vh;
+    
 }
